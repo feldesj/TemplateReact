@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { AgGridColumn, AgGridReact } from "ag-grid-react";
 
-function App() {
+import "ag-grid-community/dist/styles/ag-grid.css";
+import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+
+const App = () => {
+  const [gridApi, setGridApi] = useState(null);
+  const [gridColumnApi, setGridColumnApi] = useState(null);
+
+  const [rowData, setRowData] = useState([
+    { constructeur: "Toyota", modele: "Celica", prix: 35000 },
+    { constructeur: "Ford", modele: "Mondeo", prix: 32000 },
+    { constructeur: "Porsche", modele: "Boxter", prix: 72000 },
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="ag-theme-alpine" style={{ height: 750, width: 1400 }}>
+      <AgGridReact rowData={rowData}>
+        <AgGridColumn field="constructeur"></AgGridColumn>
+        <AgGridColumn field="modele"></AgGridColumn>
+        <AgGridColumn field="prix"></AgGridColumn>
+      </AgGridReact>
     </div>
   );
-}
+};
 
 export default App;
